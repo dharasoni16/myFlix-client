@@ -27173,6 +27173,7 @@ $parcel$ReactRefreshHelpers$f6a9.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MainView", ()=>MainView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _movieCard = require("../movie-card/movie-card");
@@ -27244,7 +27245,6 @@ const MainView = ()=>{
 };
 _s(MainView, "IABpJwwnlKE0Ou1anauC2vj7dFU=");
 _c = MainView;
-exports.default = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
 
