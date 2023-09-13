@@ -29866,7 +29866,7 @@ var MovieView = function MovieView(_ref) {
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
     src: movie.image,
     alt: "movie image"
-  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Title:"), /*#__PURE__*/_react.default.createElement("span", null, movie.title)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Description:"), /*#__PURE__*/_react.default.createElement("span", null, movie.description)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Genre:"), /*#__PURE__*/_react.default.createElement("span", null, movie.genre)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Director:"), /*#__PURE__*/_react.default.createElement("span", null, movie.director)), /*#__PURE__*/_react.default.createElement("button", {
+  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Title:"), /*#__PURE__*/_react.default.createElement("span", null, movie.title)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Description:"), /*#__PURE__*/_react.default.createElement("span", null, movie.description)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Genre:"), /*#__PURE__*/_react.default.createElement("span", null, movie.genre.Name)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, "Director:"), /*#__PURE__*/_react.default.createElement("span", null, movie.director.Name)), /*#__PURE__*/_react.default.createElement("button", {
     onClick: onBackClick
   }, "Back"));
 };
@@ -29921,8 +29921,12 @@ var MainView = function MainView() {
           title: doc.Title,
           description: doc.Description,
           image: doc.ImagePath,
-          genre: doc.Genre.Name,
-          director: doc.Director.Name
+          genre: {
+            Name: doc.Genre.Name
+          },
+          director: {
+            Name: doc.Director.Name
+          }
         };
       });
       setMovies(movieFromApi);
@@ -30053,7 +30057,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61071" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61831" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
