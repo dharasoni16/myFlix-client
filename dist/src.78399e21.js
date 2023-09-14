@@ -29915,6 +29915,7 @@ var MainView = function MainView() {
     fetch("https://movie-api-0fqq.onrender.com/movies").then(function (response) {
       return response.json();
     }).then(function (data) {
+      console.log(data, "Logging data");
       var movieFromApi = data.map(function (doc) {
         return {
           id: doc._id,
@@ -30057,7 +30058,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61831" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63971" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
