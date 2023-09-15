@@ -29884,7 +29884,180 @@ MovieView.propTypes = {
   }).isRequired,
   onBackClick: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"../components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"../components/login-view/login-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoginView = void 0;
+var _react = _interopRequireWildcard(require("react"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var LoginView = function LoginView(_ref) {
+  var onLoggedIn = _ref.onLoggedIn;
+  var _useState = (0, _react.useState)(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    username = _useState2[0],
+    setUsername = _useState2[1];
+  var _useState3 = (0, _react.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    password = _useState4[0],
+    setPassword = _useState4[1];
+  var handleSubmit = function handleSubmit(event) {
+    // this prevents the default behavior of the form which is to reload the entire page
+    event.preventDefault();
+    var data = {
+      Username: username,
+      Password: password
+    };
+    fetch("https://movie-api-0fqq.onrender.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log("Login response: ", data);
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        onLoggedIn(data.user, data.token);
+      } else {
+        alert("No such user");
+      }
+    }).catch(function (e) {
+      alert("Something went wrong");
+    });
+  };
+  return /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "username"
+  }, "Username:", /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    id: "username",
+    value: username,
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
+    },
+    minLength: 5,
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: "password"
+  }, "Password:", /*#__PURE__*/_react.default.createElement("input", {
+    type: "password",
+    id: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit"
+  }, "Submit"));
+};
+exports.LoginView = LoginView;
+},{"react":"../node_modules/react/index.js"}],"../components/signup-view/signup-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SignUpView = void 0;
+var _react = _interopRequireWildcard(require("react"));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var SignUpView = function SignUpView() {
+  var _useState = (0, _react.useState)(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    username = _useState2[0],
+    setUsername = _useState2[1];
+  var _useState3 = (0, _react.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    password = _useState4[0],
+    setPassword = _useState4[1];
+  var _useState5 = (0, _react.useState)(""),
+    _useState6 = _slicedToArray(_useState5, 2),
+    email = _useState6[0],
+    setEmail = _useState6[1];
+  var _useState7 = (0, _react.useState)(""),
+    _useState8 = _slicedToArray(_useState7, 2),
+    birthdate = _useState8[0],
+    setBirthdate = _useState8[1];
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    var data = {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthdate: birthdate
+    };
+    fetch("https://movie-api-0fqq.onrender.com/users", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(function (response) {
+      if (response.ok) {
+        alert("Signup sucessful");
+        window.location.reload();
+      } else {
+        alert("Signup failed");
+      }
+    });
+  };
+  return /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: handleSubmit
+  }, /*#__PURE__*/_react.default.createElement("label", null, "Username:", /*#__PURE__*/_react.default.createElement("input", {
+    type: "text",
+    value: username,
+    onChange: function onChange(e) {
+      return setUsername(e.target.value);
+    },
+    minLength: 5,
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("label", null, "Password", /*#__PURE__*/_react.default.createElement("input", {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("label", null, "Email", /*#__PURE__*/_react.default.createElement("input", {
+    type: "email",
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    },
+    required: true
+  })), /*#__PURE__*/_react.default.createElement("label", null, "Birthdate", /*#__PURE__*/_react.default.createElement("input", {
+    type: "date",
+    value: birthdate,
+    onChange: function onChange(e) {
+      return setBirthdate(e.target.value);
+    }
+  })), /*#__PURE__*/_react.default.createElement("button", {
+    type: "submit"
+  }, "Submit"));
+};
+exports.SignUpView = SignUpView;
+},{"react":"../node_modules/react/index.js"}],"../components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29894,6 +30067,8 @@ exports.MainView = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
+var _loginView = require("../login-view/login-view");
+var _signupView = require("../signup-view/signup-view");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -29903,16 +30078,33 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MainView = function MainView() {
-  var _useState = (0, _react.useState)([]),
+  var storedUser = JSON.parse(localStorage.getItem("user"));
+  var storedToken = localStorage.getItem("token");
+  var _useState = (0, _react.useState)(storedUser ? storedUser : null),
     _useState2 = _slicedToArray(_useState, 2),
-    movies = _useState2[0],
-    setMovies = _useState2[1];
-  var _useState3 = (0, _react.useState)(null),
+    user = _useState2[0],
+    setUser = _useState2[1];
+  var _useState3 = (0, _react.useState)(storedToken ? storedToken : null),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedMovie = _useState4[0],
-    setSelectedMovie = _useState4[1];
+    token = _useState4[0],
+    setToken = _useState4[1];
+  var _useState5 = (0, _react.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    movies = _useState6[0],
+    setMovies = _useState6[1];
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    selectedMovie = _useState8[0],
+    setSelectedMovie = _useState8[1];
   (0, _react.useEffect)(function () {
-    fetch("https://movie-api-0fqq.onrender.com/movies").then(function (response) {
+    if (!token) {
+      return;
+    }
+    fetch("https://movie-api-0fqq.onrender.com/movies", {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
+    }).then(function (response) {
       return response.json();
     }).then(function (data) {
       console.log(data, "Logging data");
@@ -29932,7 +30124,15 @@ var MainView = function MainView() {
       });
       setMovies(movieFromApi);
     });
-  }, []);
+  }, [token]);
+  if (!user) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_loginView.LoginView, {
+      onLoggedIn: function onLoggedIn(user, token) {
+        setUser(user);
+        setToken(token);
+      }
+    }), "or", /*#__PURE__*/_react.default.createElement(_signupView.SignUpView, null));
+  }
   if (selectedMovie) {
     return /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
       movie: selectedMovie,
@@ -29944,7 +30144,13 @@ var MainView = function MainView() {
   if (movies.length === 0) {
     return /*#__PURE__*/_react.default.createElement("div", null, "This list is empty!");
   }
-  return /*#__PURE__*/_react.default.createElement("div", null, movies.map(function (movie) {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: function onClick() {
+      setUser(null);
+      setToken(null);
+      localStorage.clear();
+    }
+  }, "Logout"), movies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
       movie: movie,
       key: movie.id,
@@ -29955,7 +30161,7 @@ var MainView = function MainView() {
   }));
 };
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"../components/movie-card/movie-card.jsx","../movie-view/movie-view":"../components/movie-view/movie-view.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"../components/movie-card/movie-card.jsx","../movie-view/movie-view":"../components/movie-view/movie-view.jsx","../login-view/login-view":"../components/login-view/login-view.jsx","../signup-view/signup-view":"../components/signup-view/signup-view.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -30058,7 +30264,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63971" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64242" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
