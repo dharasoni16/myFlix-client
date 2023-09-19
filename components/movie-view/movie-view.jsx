@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
@@ -8,36 +9,38 @@ export const MovieView = ({ movie, onBackClick }) => {
         <img src={movie.image} alt="movie image" />
       </div>
       <div>
-        <span>Title:</span>
+        <span className="heading">Title : </span>
         <span>{movie.title}</span>
       </div>
       <div>
-        <span>Description:</span>
+        <span className="heading">Description : </span>
         <span>{movie.description}</span>
       </div>
       <div>
-        <span>Genre:</span>
+        <span className="heading">Genre : </span>
         <span>{movie.genre.Name}</span>
       </div>
       <div>
-        <span>Director:</span>
+        <span className="heading">Director : </span>
         <span>{movie.director.Name}</span>
       </div>
-      <button onClick={onBackClick}>Back</button>
+      <button onClick={onBackClick} className="back-button">
+        Back
+      </button>
     </div>
   );
 };
 
 MovieView.propTypes = {
-  movie:PropTypes.shape({
-    title:PropTypes.string.isRequired,
-    description:PropTypes.string.isRequired,
-    genre:PropTypes.shape({
-      Name:PropTypes.string.isRequired
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
     }),
-    director:PropTypes.shape({
-      Name:PropTypes.string.isRequired
-    })
+    director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+    }),
   }).isRequired,
-  onBackClick:PropTypes.func.isRequired
+  onBackClick: PropTypes.func.isRequired,
 };
