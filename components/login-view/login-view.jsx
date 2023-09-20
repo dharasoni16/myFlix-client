@@ -38,7 +38,7 @@ export const LoginView = ({ onLoggedIn }) => {
   };
   return (
     <>
-      <p className="mb-0 text-center">Welcome to </p>
+      <p className="mb-0  my-3 text-center">Welcome to </p>
       <h2 className="fw-bold mt-0 text-center">myFlix</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formUsername">
@@ -60,7 +60,7 @@ export const LoginView = ({ onLoggedIn }) => {
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit" className="mt-3">
+        <Button variant="dark" type="submit" className="mt-3">
           Login
         </Button>
       </Form>

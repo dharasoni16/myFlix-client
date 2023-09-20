@@ -33,6 +33,9 @@ export const SignUpView = () => {
     });
   };
   return (
+    <>
+     <p className="mb-0 my-3 text-center">Welcome to </p>
+      <h2 className="fw-bold mt-0 text-center">myFlix</h2>
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username</Form.Label>
@@ -42,7 +45,7 @@ export const SignUpView = () => {
           onChange={(e) => setUsername(e.target.value)}
           minLength={5}
           required
-        />
+          />
       </Form.Group>
       <Form.Group controlId="formPassword">
         <Form.Label>Password</Form.Label>
@@ -51,7 +54,7 @@ export const SignUpView = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+          />
       </Form.Group>
       <Form.Group controlId="formEmail">
         <Form.Label>Email</Form.Label>
@@ -60,7 +63,7 @@ export const SignUpView = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
+          />
       </Form.Group>
       <Form.Group controlId="formBirthdate">
         <Form.Label>Birthdate</Form.Label>
@@ -68,11 +71,12 @@ export const SignUpView = () => {
           type="date"
           value={birthdate}
           onChange={(e) => setBirthdate(e.target.value)}
-        />
+          />
       </Form.Group>
-      <Button variant="primary" type="submit" className="mt-3">
+      <Button variant="dark" type="submit" className="mt-3">
         SignUp
       </Button>
     </Form>
+  </>
   );
 };
