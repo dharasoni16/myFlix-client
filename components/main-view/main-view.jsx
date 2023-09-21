@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -7,6 +7,7 @@ import { NavigationBar } from "../navigation-bar/navigation-bar";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -78,7 +79,12 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
                   </Col>
                 )}
               </>
@@ -112,10 +118,34 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3}>
-                        <MovieCard movie={movie} />
+                        <MovieCard
+                          user={user}
+                          setUser={setUser}
+                          token={token}
+                          movie={movie}
+                        />
                       </Col>
                     ))}
                   </>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <Col>
+                    <ProfileView
+                      user={user}
+                      setUser={setUser}
+                      token={token}
+                      movies={movies}
+                    />
+                  </Col>
                 )}
               </>
             }
