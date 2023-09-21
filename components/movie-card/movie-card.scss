@@ -1,0 +1,14 @@
+.btnFont{
+    width: 185px;
+}
+
+.movieCard{
+    margin: 0 auto;
+    Card{
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+       
+    }
+}

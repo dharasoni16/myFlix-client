@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 // import proptypes library here
 import PropTypes from "prop-types";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
+import "./movie-card.scss";
 
 export const MovieCard = ({ user, setUser, token, movie }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -67,27 +69,48 @@ export const MovieCard = ({ user, setUser, token, movie }) => {
   };
 
   return (
-    <Card className="h-100 my-3" style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={movie.image} />
-      <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.director.Name}</Card.Text>
-        <Link to={`/movies/${movie.title}`}>
-          <Button variant="link">Details</Button>
-        </Link>
-      </Card.Body>
-      <Card.Footer>
-        {!isFavorite ? (
-          <Button variant="dark" onClick={addToFavoriteMovie}>
-            Add To FavoriteList
-          </Button>
-        ) : (
-          <Button variant="dark" onClick={deleteFromFavoriteMovie}>
-            Remove From FavoriteList
-          </Button>
-        )}
-      </Card.Footer>
-    </Card>
+    <Row>
+      <Col sm={3} md={4} lg={8} className="movieCard">
+        <Card
+          className="my-3 bg-dark text-white"
+          style={{ width: "18rem", height: "620px" }}
+        >
+          <Card.Img
+            variant="top"
+            src={movie.image}
+            style={{ height: "400px" }}
+          />
+          <Card.Body>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.director.Name}</Card.Text>
+            <Link to={`/movies/${movie.title}`}>
+              <Button variant="link">Details</Button>
+            </Link>
+          </Card.Body>
+          <Card.Footer className="mx-auto">
+            {!isFavorite ? (
+              <Button
+                variant="light"
+                size="sm"
+                className="btnFont"
+                onClick={addToFavoriteMovie}
+              >
+                Add To FavoriteList
+              </Button>
+            ) : (
+              <Button
+                variant="light"
+                size="sm"
+                className="btnFont"
+                onClick={deleteFromFavoriteMovie}
+              >
+                Remove From FavoriteList
+              </Button>
+            )}
+          </Card.Footer>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

@@ -3,7 +3,10 @@ import { useState } from "react";
 import { Card, Form, Button, Modal } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 import { MovieCard } from "../movie-card/movie-card";
+
+import "./profile-view.scss";
 
 export const ProfileView = ({ user, setUser, token, movies }) => {
   const [username, setUsername] = useState(user.Username);
@@ -74,31 +77,37 @@ export const ProfileView = ({ user, setUser, token, movies }) => {
   const hideDeregister = () => setDeregister(false);
 
   return (
-    <>
+    <Container className="container-height">
       <Row>
         <Col>
-          <Card>
+          <Card className=" my-3 bg-dark text-white">
             <Card.Body>
               <Card.Title>My Profile</Card.Title>
               <Card.Text>
-                Username : {username}
+                Name : {username}
                 <br />
                 Email : {email}
               </Card.Text>
-              <Button variant="dark" onClick={handleShowModal} className="mx-2">
+              <Button
+                variant="light"
+                onClick={handleShowModal}
+                className="mx-2"
+              >
                 Update Profile
               </Button>
-              <Button variant="dark" onClick={handleDeregister}>
-                Delete Your Account
+              <Button variant="light" onClick={handleDeregister}>
+                Delete Account
               </Button>
             </Card.Body>
           </Card>
         </Col>
       </Row>
       <Row>
-        <h2>Favorite Movies</h2>
+        <Col xs={12}>
+          <h2 className="text-white text-center">Favorite Movies</h2>
+        </Col>
         {favoriteMovies.map((movie) => (
-          <Col>
+          <Col xs={12} md={6} lg={3} key={movie.id}>
             <MovieCard
               user={user}
               setUser={setUser}
@@ -109,10 +118,10 @@ export const ProfileView = ({ user, setUser, token, movies }) => {
         ))}
       </Row>
       <Modal show={showModal} onHide={handleHideModal}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="modalbackground">
           <Modal.Title>Update Your Profile</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="modalbackground">
           <Form>
             <Form.Group controlId="formUsername">
               <Form.Label>Username</Form.Label>
@@ -151,30 +160,32 @@ export const ProfileView = ({ user, setUser, token, movies }) => {
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleHideModal}>
+        <Modal.Footer style={{ backgroundColor: "#212529" }}>
+          <Button variant="light" onClick={handleHideModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleUpdateUser}>
+          <Button variant="light" onClick={handleUpdateUser}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
 
       <Modal show={deregister} onHide={hideDeregister}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="modalbackground">
           <Modal.Title>Account Deregistration</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Do you really want to Delete Your Account?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={hideDeregister}>
+        <Modal.Body className="modalbackground">
+          Do you really want to Delete Your Account?
+        </Modal.Body>
+        <Modal.Footer style={{ backgroundColor: "#212529" }}>
+          <Button variant="light" onClick={hideDeregister}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleDeleteUser}>
+          <Button variant="light" onClick={handleDeleteUser}>
             Confirm
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </Container>
   );
 };

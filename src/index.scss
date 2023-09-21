@@ -1,1 +1,10 @@
 @import '~bootstrap/scss/bootstrap.scss';
+
+#root{
+    height: 100%;
+    background-image:url(./images/movie-background-collage.jpg);
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+}
