@@ -1,15 +1,26 @@
 .back-button{
     padding: 4px 12px 4px 12px;
-    color: whitesmoke;
-    background-color: dodgerblue;
+    color: black;
+    background-color: #f8f9fa;
     border: none;
     border-radius: 4px;
+    width: 120px;
   }
   
-  img{
-    width:100%;
-  }
-
   .heading{
     font-weight: bold;
   }
+
+  .movieCard{
+    margin: 0 auto;
+    Card{
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;    
+    }
+}
+
+.container-height{
+  height: 100vh;
+}
