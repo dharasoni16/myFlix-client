@@ -40,10 +40,10 @@ export const ProfileView = ({ user, setUser, token, movies }) => {
       body: JSON.stringify(data),
     })
       .then((response) => response.json())
-      .then((user) => {
-        if (user) {
-          localStorage.setItem("user", JSON.stringify(user.Username));
-          setUser(user);
+      .then((data) => {
+        if (data) {
+          localStorage.setItem("user", JSON.stringify(data.Username));
+          setUser(data);
           alert("Your details has been updated");
         } else {
           alert("Could not Update the details, Something went wrong!");
