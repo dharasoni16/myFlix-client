@@ -8,12 +8,15 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
+import { Form } from "react-bootstrap";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [Search, setSearch] = useState("");
+
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -116,16 +119,33 @@ export const MainView = () => {
                   <Col>This list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} md={3}>
-                        <MovieCard
-                          user={user}
-                          setUser={setUser}
-                          token={token}
-                          movie={movie}
+                    <Row className="my-3">
+                      <Form className="mx-auto col-4">
+                        <Form.Control
+                          onChange={(e) => setSearch(e.target.value)}
+                          placeholder="Search Movie Titles"
+                          aria-label="Search Movie Titles"
                         />
-                      </Col>
-                    ))}
+                      </Form>
+                    </Row>
+                    {movies
+                      .filter((movie) => {
+                        return Search === ""
+                          ? movie
+                          : movie.title
+                              .toLowerCase()
+                              .includes(Search.toLowerCase());
+                      })
+                      .map((movie) => (
+                        <Col className="mb-5" key={movie.id} md={3}>
+                          <MovieCard
+                            user={user}
+                            setUser={setUser}
+                            token={token}
+                            movie={movie}
+                          />
+                        </Col>
+                      ))}
                   </>
                 )}
               </>

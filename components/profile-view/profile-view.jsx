@@ -77,7 +77,7 @@ export const ProfileView = ({ user, setUser, token, movies }) => {
   const hideDeregister = () => setDeregister(false);
 
   return (
-    <Container className="container-height">
+    <Container>
       <Row>
         <Col>
           <Card className=" my-3 bg-dark text-white">
